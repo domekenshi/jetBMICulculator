@@ -6,9 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -39,30 +41,62 @@ class MainActivity : ComponentActivity() {
                         // スペーサー
                         Spacer(modifier = Modifier.height(30.dp))
                         // 身長
-                        Text(
-                            text = "身長(cm)",
-                            color = Color(0xFFF85F6A),
-                            fontWeight = FontWeight.Bold,
-
-                            )
-                        TextField(
-                            modifier = Modifier.fillMaxWidth(),
+                        PinkLabeledTextField(
                             value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = Color.Transparent
-                            ),
-                            placeholder = { Text(text = "178") },
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number
-                            ),
-                            singleLine = true,
+                            onValueChange = {
+
+                            },
+                            label = "身長(cm)",
+                            placeholder = "170",
                         )
+                        // スペーサー
+                        Spacer(modifier = Modifier.height(20.dp))
+// 身長                  // 体重
+                        PinkLabeledTextField(
+                            value = "",
+                            onValueChange = {
+
+                            },
+                            label = "体重(kg)",
+                            placeholder = "65",
+                        )
+                        // スペーサー
+                        Spacer(modifier = Modifier.height(20.dp))
 
                     }
 
                 }
             }
         }
+
+    }
+}
+@Composable
+fun PinkLabeledTextField(
+    value:String,
+    onValueChange:(String)->Unit,
+    label:String,
+    placeholder: String,
+){
+    Column {
+        Text(
+            text = label,
+            color = Color(0xFFF85F6A),
+            fontWeight = FontWeight.Bold,
+
+            )
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = value,
+            onValueChange = onValueChange,
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent
+            ),
+            placeholder = { Text(text = placeholder) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            ),
+            singleLine = true,
+        )
     }
 }
