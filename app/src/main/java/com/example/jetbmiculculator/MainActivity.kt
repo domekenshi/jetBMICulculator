@@ -1,5 +1,6 @@
 package com.example.jetbmiculculator
 
+import android.graphics.BlendModeColorFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetbmiculculator.ui.theme.JetBMICulculatorTheme
@@ -61,7 +63,32 @@ class MainActivity : ComponentActivity() {
                             placeholder = "65",
                         )
                         // スペーサー
+                        Spacer(modifier = Modifier.height(30.dp))
+                        // ボタン
+                        Button(
+                            onClick = { /*TODO*/ },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color(0xFFF85F6A)
+                            ),
+                        ) {
+                            Text(
+                                text = "計算する",
+                                color = Color.White,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        // スペーサー
                         Spacer(modifier = Modifier.height(20.dp))
+                        // 結果を表示するテキスト
+                        Text(
+                            text = "あなたのBMIは00.0です",
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                        )
 
                     }
 
@@ -71,13 +98,14 @@ class MainActivity : ComponentActivity() {
 
     }
 }
+
 @Composable
 fun PinkLabeledTextField(
-    value:String,
-    onValueChange:(String)->Unit,
-    label:String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
     placeholder: String,
-){
+) {
     Column {
         Text(
             text = label,
