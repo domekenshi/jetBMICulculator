@@ -3,15 +3,14 @@ package com.example.jetbmiculculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetbmiculculator.ui.theme.JetBMICulculatorTheme
@@ -26,6 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    // タイトル
                     Column(
                         horizontalAlignment = Alignment.Start,
                         modifier = Modifier.padding(20.dp)
@@ -36,7 +36,31 @@ class MainActivity : ComponentActivity() {
                             fontSize = 26.sp,
                             fontWeight = FontWeight.ExtraBold
                         )
+                        // スペーサー
+                        Spacer(modifier = Modifier.height(30.dp))
+                        // 身長
+                        Text(
+                            text = "身長(cm)",
+                            color = Color(0xFFF85F6A),
+                            fontWeight = FontWeight.Bold,
+
+                            )
+                        TextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = "",
+                            onValueChange = {},
+                            colors = TextFieldDefaults.textFieldColors(
+                                backgroundColor = Color.Transparent
+                            ),
+                            placeholder = { Text(text = "178") },
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number
+                            ),
+                            singleLine = true,
+                        )
+
                     }
+
                 }
             }
         }
