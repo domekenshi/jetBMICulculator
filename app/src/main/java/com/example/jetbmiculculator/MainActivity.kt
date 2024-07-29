@@ -2,8 +2,10 @@ package com.example.jetbmiculculator
 
 import android.graphics.BlendModeColorFilter
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.jetbmiculculator.ui.theme.JetBMICulculatorTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -44,20 +47,20 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(30.dp))
                         // 身長
                         PinkLabeledTextField(
-                            value = "",
+                            value = viewModel.height,
                             onValueChange = {
-
+                                viewModel.height = it
                             },
                             label = "身長(cm)",
                             placeholder = "170",
                         )
                         // スペーサー
                         Spacer(modifier = Modifier.height(20.dp))
-// 身長                  // 体重
+                        // 体重
                         PinkLabeledTextField(
-                            value = "",
+                            value = viewModel.weight,
                             onValueChange = {
-
+                                viewModel.weight = it
                             },
                             label = "体重(kg)",
                             placeholder = "65",
@@ -66,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(30.dp))
                         // ボタン
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { viewModel.calculateBMI() },
                             modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.buttonColors(
                                 backgroundColor = Color(0xFFF85F6A)
@@ -83,7 +86,7 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(20.dp))
                         // 結果を表示するテキスト
                         Text(
-                            text = "あなたのBMIは00.0です",
+                            text = "あなたのBMIは${viewModel.bmi}です",
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             fontSize = 24.sp,
